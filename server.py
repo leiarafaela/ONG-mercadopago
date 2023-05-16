@@ -1,8 +1,6 @@
 from app import app
+from app.controllers import home_controller
 
-@app.route('/')
-def home():
-    return '<h1> Olá!!</h1>'
 
 if __name__ == '__main__':
     app.run(host='localhost', port=5000, debug=True)
