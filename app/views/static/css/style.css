@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display+SC&family=Poppins&display=swap');
+
+body,h1,h2,ul,li,a,p{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins';
+}
+ul{
+  list-style: none;
+}
+a{
+  text-decoration: none;
+}
+
+/* Menu */
+.header-bg{
+  background-color: #CD0000;
+}
+.header-container{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+.header-container p{
+  font-size: 2rem;
+  color: #FFD700;
+}
+.header-menu ul{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+
+}
+
+.header-menu a{
+  color: aliceblue;
+  display: inline-block;
+  padding: 16px 0px;
+  position: relative;
+}
+.header-menu a:hover{
+  color: #FFD700;
+}
+.header-menu a:hover::after{
+  content: "";
+  display: block;
+  height: 2px;
+  width: 100%;
+  background-color: #FFD700;
+  transition: 0.3s;
+  position: absolute;
+}
+
+
+/* Main */
+
+/* Introdução */
+.introducao{
+  background: url('../img/soldados.jpg');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding: 60px;
+  height: 700px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.introducao h1{
+  text-align: center;
+  font-size: 3rem;
+}
+
+.introducao a{
+  color: aliceblue;
+  padding: 10px 50px;
+  background-color: #CD0000;
+  border-radius: 5px;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition:  all 0.3s ease 0s;
+}
+.introducao a:hover{
+  transition: 0.3s ease 0s;
+  color: #FFD700;
+  transform: translateY(-10px);
+}
+
+/* Propósito */
+.proposito,.fazemos,.parceiros{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.proposito p ,.fazemos p{
+  margin-top: 0.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.risco::after{
+  display: block;
+  content: '';
+  width: 2.25rem;
+  height: 4px;
+  border-radius: 5px;
+  background-color: #000;
+  margin: 0 auto;
+  margin-top: 0.5rem;
+} 
+.parceiros ul{
+  margin-top: 0.5rem;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 40px;
+}
+.parceiros ul img{
+  width: 250px;
+  height: 150px;
+}
+
+/* Doar */
+.doar{
+  background-color: #CD0000;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  padding: 20px;
+}
+
+.informacao-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+.informacao-container p{
+  color: aliceblue;
+  text-align: center;
+}
+.informacao-container img{
+  width:  120px;
+}
+
+.form-container{
+  max-width: 600px;
+}
+
+.form{
+  display: flex;
+  flex-direction: column;
+}
+
+.form label{
+  color: aliceblue;
+}
+.form input{
+  padding: 5px 10px;
+  border: none;
+  border-radius: 4px;
+  padding: 5px;
+}
+.form .botao{
+  padding: 10px 25px;
+  margin-top: 0.9rem;
+  cursor: pointer;
+  align-self: center;
+  text-align: center;
+  font-weight: bold;
+  background-color: tomato;
+  color: aliceblue;
+  border-radius: 5px;
+}
+
+/* Footer */
+.footer-bg{
+  background-color: #FFD700;
+}
+
+.footer-container{
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
+  flex-wrap: wrap;
+
+}
+.footer-contato{
+  display: flex;
+  flex-direction: column;
+}
+.footer-premios{
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
