@@ -14,4 +14,3 @@ conexao = pyodbc.connect(driver='{SQL Server}', host=server, database=db,
 
 print("Conexao Bem Sucedida")
 
-cursor = conexao.cursor()

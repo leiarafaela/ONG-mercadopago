@@ -1,19 +1,32 @@
-from ..models.connection import cursor
+from ..models.connection import conexao
 from contextlib import closing
 from ..util import row_to_dict, rows_to_dict
+import pyodbc
+
 
 class Doador():
     def getAll():
-        with closing(cursor()) as con, closing(con.cursor()) as cur:
-            cur.execute("SELECT * FROM Doadores")
-            return rows_to_dict(cur.description, cur.fetchall())
+        pass
         
     def create(doador):
-        with closing(cursor()) as con, closing(con.cursor()) as cur:
-            cur.execute("INSERT INTO Doadores (Nome, Sobrenome, Cidade, País, Valor) VALUES (%s, %s, %s, %s, %s)", [
-                doador['nome'], doador['sobrenome'], doador['cidade'], doador['pais'], doador['valor'],])
-            doador = cur.lastrowid
-            con.commit()
-            con.close()
-            return doador
-        
+        try:
+
+            # Abrir uma nova conexão com o banco de dados
+            cursor = conexao.cursor()
+            
+            # Execução do comando SQL
+            cursor.execute("INSERT INTO Doadores (Nome, Sobrenome, Cidade, País, Valor) VALUES (?, ?, ?, ?, ?)", [doador['nome'], doador['sobrenome'], doador['cidade'], doador['pais'], doador['valor'],])
+            # Confirma a transação
+            conexao.commit()
+            print("Objeto criado e salvo com sucesso!")
+
+        except pyodbc.Error as erro:
+        # Em caso de erro, desfazer as alterações
+            conexao.rollback()
+            print(f"Ocorreu um erro ao criar e salvar o objeto: {erro}")
+
+        finally:
+            # Fechar a conexão com o banco de dados
+            cursor.close()
+
+        return doador

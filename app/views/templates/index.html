@@ -77,7 +77,7 @@
           <img src="../static/img/donation.png" alt="" />
         </div>
         <div class="form-container">
-          <form class="form" action="/mp/pagamento" method="POST">
+          <form class="form" action="{{ url_for('criar_pagamento') }}" method="POST">
             <label for="nome">Nome:</label>
             <input type="text" id="nome" name="nome" />
             <label for="sobrenome">Sobrenome:</label>

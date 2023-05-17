@@ -3,7 +3,7 @@ import requests
 
 from app import app
 from ..models.Doador import Doador
-from flask import render_template, request
+from flask import render_template, request, redirect
 # from selenium import webdriver
 # from selenium.webdriver.chrome.service import Service
 # from selenium.webdriver.common.by import By
@@ -26,13 +26,15 @@ def meios():
     
  
 @app.route('/mp/pagamento', methods=['POST'])
-def criapagamento(valor):
-    
+def criar_pagamento():
+    infos_doador = {}
     valorPagamento = 0
     
     for chave, valor in request.form.items():
         if chave == "valor":
             valorPagamento = valor
+        
+        infos_doador[chave] = valor
     
     base_url = "https://api.mercadopago.com"
      
@@ -57,20 +59,27 @@ def criapagamento(valor):
 
     response = requests.post(f"{base_url}/checkout/preferences", json=payment_data, headers=headers)
 
-    if response.status_code == 201:
+    if response.status_code == 200:
         payment = response.json()
         payment_url = payment["init_point"]
-         
-        return payment_url
+
+        create_doador = Doador.create(infos_doador)
+
+        return redirect(payment_url)
 
     else:
         
-        print("Erro ao criar pagamento:", response.status_code)
+        return "ERRO!"
  
+
+
 
 @app.route('/home', methods=['POST'])
 def criar_doador():
     infos_doador = {}
+    for chave, valor in request.form.items():
+        infos_doador[chave] = valor
+
     create_doador = Doador.create(infos_doador)
 
     return create_doador
