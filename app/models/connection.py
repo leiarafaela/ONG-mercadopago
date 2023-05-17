@@ -1,14 +1,17 @@
 import pyodbc
+from dotenv import load_dotenv
+import os
 
-dados_conexao = (
-    "Driver={SQL Server};"
-    "Server=vsinfo.net,14337;"
-    "Database=ibooks;"
-    "Username=user_ibooks"
-    "Password=3w#94D*X"
-)
+load_dotenv()
 
-conexao = pyodbc.connect(dados_conexao)
-print("Conexão Bem Sucedida")
+server=os.getenv('DB_SERVER')
+db=os.getenv('DB_DATABASE')
+username=os.getenv('DB_USER')
+password=os.getenv('DB_PASSWORD')
+
+conexao = pyodbc.connect(driver='{SQL Server}', host=server, database=db,
+                      user=username, password=password)
+
+print("Conexao Bem Sucedida")
 
 cursor = conexao.cursor()
