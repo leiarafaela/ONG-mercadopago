@@ -2,7 +2,7 @@ import mercadopago
 import requests
 
 from app import app
-from models.doador import Doador
+from ..models.Doador import Doador
 from flask import render_template, request
 # from selenium import webdriver
 # from selenium.webdriver.chrome.service import Service

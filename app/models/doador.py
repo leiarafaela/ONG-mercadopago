@@ -1,6 +1,6 @@
-from models.connection import cursor
+from ..models.connection import cursor
 from contextlib import closing
-from util import row_to_dict, rows_to_dict
+from ..util import row_to_dict, rows_to_dict
 
 class Doador():
     def getAll():
