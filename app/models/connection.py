@@ -1,12 +1,17 @@
 import pyodbc
+from dotenv import load_dotenv
+import os
 
-dados_conexao = (
-    "Driver={SQL Server};"
-    "Server=DESKTOP-T2JV7P5;"
-    "Database=PythonSQL;"
-)
+load_dotenv()
 
-conexao = pyodbc.connect(dados_conexao)
-print("Conexão Bem Sucedida")
+server=os.getenv('DB_SERVER')
+db=os.getenv('DB_DATABASE')
+username=os.getenv('DB_USER')
+password=os.getenv('DB_PASSWORD')
+
+conexao = pyodbc.connect(driver='{SQL Server}', host=server, database=db,
+                      user=username, password=password)
+
+print("Conexao Bem Sucedida")
 
 cursor = conexao.cursor()

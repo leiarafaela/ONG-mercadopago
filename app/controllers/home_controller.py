@@ -1,15 +1,25 @@
 import mercadopago
-from app import app
-from flask import render_template, request
 import requests
+
+from app import app
+from models.doador import Doador
+from flask import render_template, request
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.options import Options
 
-@app.route('/')
+
+@app.route('/home', methods=['GET'])
 def home():
     return render_template('index.html')
+
+@app.route('/home', methods=['POST'])
+def criar_doador():
+    infos_doador = {}
+    create_doador = Doador.create(infos_doador)
+
+    return create_doador
  
 @app.route('/mp/meios', methods=['GET'])
 def meios():
@@ -63,4 +73,3 @@ def criapagamento(valor):
         
         print("Erro ao criar pagamento:", response.status_code)
  
-    
