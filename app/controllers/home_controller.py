@@ -34,18 +34,13 @@ def criar_pagamento():
             valorPagamento = valor
         
         infos_doador[chave] = valor
-    
         
     create_doador = Doador.create(infos_doador)
 
-
-
     return redirect(payment(valorPagamento))
 
- 
 
-
-
+# Criação do doador já está sendo feita no função criar_pagamento
 @app.route('/home', methods=['POST'])
 def criar_doador():
     infos_doador = {}

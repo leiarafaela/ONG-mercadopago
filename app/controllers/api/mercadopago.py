@@ -5,7 +5,8 @@ CLIENT_ID = '6749706992397515'
 CLIENT_SECRET = 'wTHIj88ASrUCI0qpZ7apIUjbx9Fnjod1'
 
 
-def payment(valor):
+def payment(valorPagamento):
+    valor =  int(valorPagamento)
     preference = { 
         "items": [
             {
