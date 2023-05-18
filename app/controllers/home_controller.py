@@ -2,7 +2,8 @@ import mercadopago
 import requests
 
 from app import app
-from ..models.Doador import Doador
+from ..models.doador import Doador
+from .api.mercadopago import payment
 from flask import render_template, request, redirect
 # from selenium import webdriver
 # from selenium.webdriver.chrome.service import Service
@@ -28,48 +29,19 @@ def meios():
 @app.route('/mp/pagamento', methods=['POST'])
 def criar_pagamento():
     infos_doador = {}
-    valorPagamento = 0
-    
     for chave, valor in request.form.items():
         if chave == "valor":
             valorPagamento = valor
         
         infos_doador[chave] = valor
     
-    base_url = "https://api.mercadopago.com"
-     
-    payment_data = { 
-        "items": [
-            {
-                "title": "Doação - ONG",
-                "description": "Doação para a Ong",
-                "picture_url": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pngwing.com%2Fpt%2Ffree-png-ikizz&psig=AOvVaw1QRDh4pAgkqK1oJ0Ul_-Yq&ust=1684372696597000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCID11bSX-_4CFQAAAAAdAAAAABAE",
-                "category_id": "donate",
-                "quantity": 1,
-                "currency_id": "R$",
-                "unit_price": valorPagamento
-            }
-        ]
-    }
-      
-    headers = {
-        "Content-Type": "application/json",
-        "Authorization": "Bearer TEST-6749706992397515-032221-80c67714fe6c5cbc6c321d6122c6f65c-346350990"
-    }
-
-    response = requests.post(f"{base_url}/checkout/preferences", json=payment_data, headers=headers)
-
-    if response.status_code == 200:
-        payment = response.json()
-        payment_url = payment["init_point"]
-
-        create_doador = Doador.create(infos_doador)
-
-        return redirect(payment_url)
-
-    else:
         
-        return "ERRO!"
+    create_doador = Doador.create(infos_doador)
+
+
+
+    return redirect(payment(valorPagamento))
+
  
 
 
