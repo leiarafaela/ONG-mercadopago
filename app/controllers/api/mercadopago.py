@@ -1,43 +1,29 @@
 import mercadopago
-import os
+import json
 
-sdk = mercadopago.SDK("TEST-6749706992397515-032221-80c67714fe6c5cbc6c321d6122c6f65c-346350990")
-
-# Cria um item na preferência
-preference_data = {
-    "items": [
-        {
-            "title": "Doação",
-            "quantity": 1,
-            "unit_price": 105.50
-        }
-    ]
-}
-
-preference_response = sdk.preference().create(preference_data)
-preference = preference_response["response"]
+CLIENT_ID = '6749706992397515'
+CLIENT_SECRET = 'wTHIj88ASrUCI0qpZ7apIUjbx9Fnjod1'
 
 
+def payment(valor):
+    preference = { 
+        "items": [
+            {
+                "title": "Doação - ONG",
+                "description": "Doação para a Ong",
+                "picture_url": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pngwing.com%2Fpt%2Ffree-png-ikizz&psig=AOvVaw1QRDh4pAgkqK1oJ0Ul_-Yq&ust=1684372696597000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCID11bSX-_4CFQAAAAAdAAAAABAE",
+                "category_id": "donate",
+                "quantity": 1,
+                "currency_id": "BRL",
+                "unit_price": valor
+            }
+        ]
+    }
 
+    mp = mercadopago.SDK("TEST-6749706992397515-032221-80c67714fe6c5cbc6c321d6122c6f65c-346350990")
 
-#client_id = os.
+    preferenceResult = mp.preference().create(preference)
 
-# mp = mercadopago.MP("TEST-a76ed238-da3e-4281-9e99-9c4eb2ef57c8", "TEST-6749706992397515-032221-80c67714fe6c5cbc6c321d6122c6f65c-346350990")
-
-
-# payment_data = {
-#     "transaction_amount": 100.0,
-#     "description": "Compra de exemplo",
-#     "payment_method_id": "visa",
-#     "payer": {
-#         "email": "comprador@teste.com"
-#     }
-# }
- 
-# payment = mp.post("/v1/payments", payment_data)
- 
-# if payment["status"] == 201:
-#     payment_url = payment["response"]["init_point"]
-#     print("URL do pagamento:", payment_url)
-# else:
-#     print("Erro ao criar pagamento:", payment["status"])
+    url = preferenceResult["response"]["init_point"]
+    
+    return url
