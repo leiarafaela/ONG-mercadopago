@@ -1,5 +1,4 @@
 import mercadopago
-import json
 
 CLIENT_ID = '6749706992397515'
 CLIENT_SECRET = 'wTHIj88ASrUCI0qpZ7apIUjbx9Fnjod1'
@@ -10,10 +9,10 @@ def payment(valorPagamento):
     preference = { 
         "items": [
             {
-                "title": "Doação - ONG",
-                "description": "Doação para a Ong",
+                "title": "SoviOng",
+                "description": "Doações para ONG",
                 "picture_url": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.pngwing.com%2Fpt%2Ffree-png-ikizz&psig=AOvVaw1QRDh4pAgkqK1oJ0Ul_-Yq&ust=1684372696597000&source=images&cd=vfe&ved=0CBEQjRxqFwoTCID11bSX-_4CFQAAAAAdAAAAABAE",
-                "category_id": "donate",
+                "category_id": "donations",
                 "quantity": 1,
                 "currency_id": "BRL",
                 "unit_price": valor

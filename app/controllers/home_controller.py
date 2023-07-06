@@ -1,14 +1,9 @@
+from flask import render_template, request, redirect
 import mercadopago
-import requests
 
 from app import app
-from ..models.doador import Doador
-from .api.mercadopago import payment
-from flask import render_template, request, redirect
-# from selenium import webdriver
-# from selenium.webdriver.chrome.service import Service
-# from selenium.webdriver.common.by import By
-# from selenium.webdriver.chrome.options import Options
+from ..api.mercadopago import payment
+
 
 
 @app.route('/home', methods=['GET'])
@@ -34,19 +29,4 @@ def criar_pagamento():
             valorPagamento = valor
         
         infos_doador[chave] = valor
-        
-    create_doador = Doador.create(infos_doador)
-
     return redirect(payment(valorPagamento))
-
-
-# Criação do doador já está sendo feita no função criar_pagamento
-@app.route('/home', methods=['POST'])
-def criar_doador():
-    infos_doador = {}
-    for chave, valor in request.form.items():
-        infos_doador[chave] = valor
-
-    create_doador = Doador.create(infos_doador)
-
-    return create_doador
